@@ -11,10 +11,10 @@
 using namespace std;
 
 int main() {
-	Cashier c("gosho", 10);
-	Cashier c1;
-	c1.setName("qwertyuiopqwertyuiopqwertyuiopasdfghjkl");
-	//cin>>c1;
-	cout<<c1;
+	Store s(2);
+	cin>>s;
+	cout<<s;
+	cout<<s.totalIncome();
+	cout<<s["pesho"];
 	return 0;
 }

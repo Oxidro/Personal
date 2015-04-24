@@ -116,3 +116,72 @@ istream& operator >>(istream& is, Cashier & c)
 	return is;
 }
 void Cashier::setName(char *_name){strncpy(name,_name, 31);};
+
+Store::Store(int n)
+{
+	numberOfPayDesks=n;
+}
+ostream& operator<<(ostream& os, Store const & s)
+{
+	for(int i=0; i<s.numberOfPayDesks; i++)
+	{
+		os<<i<<") "<<s.payDesk[i]<<endl;
+	}
+	return os;
+}
+istream& operator>>(istream& is, Store & s)
+{
+	for(int i=0; i<s.numberOfPayDesks; i++)
+	{
+		char string[31];
+		Cashier c;
+		is.getline(string, 31);
+		c.setName(string);
+		double income;
+		is>>income;
+		c.setIncome(income);
+		s.payDesk[i]=c;
+		is.getline(string, 31);
+	}
+	return is;
+}
+double Store::totalIncome()
+{
+	double totalIncome=0;
+	for(int i=0; i<numberOfPayDesks; i++)
+	{
+		totalIncome+=payDesk[i].getIncome();
+	}
+	return totalIncome;
+}
+Cashier const& Store::operator[](char* name)
+{
+	int n=10;
+	for(int i=0; i<numberOfPayDesks; i++)
+	{
+		if(strcmp(payDesk[i].getName() , name)==0)
+			n=i;
+	}
+	if(n==10)
+		cout<<"Not found";
+	return payDesk[n];
+}
+
+double Store::avarageIncome()
+{
+	return totalIncome()/numberOfPayDesks;
+}
+
+bool Store::operator==(Store const& s)
+{
+	//return avarageIncome()==s.totalIncome();
+}
+
+
+
+
+
+
+
+
+

@@ -41,7 +41,7 @@ public:
 	Cashier(char* name="<unnamed>", double income=0);
 	friend std::ostream& operator <<(std::ostream&, Cashier const&);
 	friend std::istream& operator >>(std::istream&, Cashier &);
-	char* getName(){return name;};
+	char* getName(){return  name;};
 	double getIncome(){return income;};
 	void setName(char *);
 	void setIncome(double _income){income=_income;};
@@ -49,10 +49,22 @@ public:
 class Store
 {
 private:
-	int payDesks;
-	Cashier* payDesk[10];
-private:
-	Store();
+	int numberOfPayDesks;
+	Cashier payDesk[10];
+public:
+	Store(int numberOfPayDesks=1);
+	friend std::ostream& operator<<(std::ostream&, Store const &);
+	friend std::istream& operator>>(std::istream&, Store &);
+	void setNumberOfPayDesks(int);
+	double totalIncome();
+	Cashier const& operator[](char*);
+	double avarageIncome();
+	bool operator==(Store const&);
+	bool operator<(Store const&);
+	bool operator>(Store const&);
+	bool operator<=(Store const&);
+	bool operator>=(Store const&);
+
 };
 
 
