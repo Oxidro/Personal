@@ -145,7 +145,7 @@ istream& operator>>(istream& is, Store & s)
 	}
 	return is;
 }
-double Store::totalIncome()
+double Store::totalIncome() const
 {
 	double totalIncome=0;
 	for(int i=0; i<numberOfPayDesks; i++)
@@ -167,14 +167,14 @@ Cashier const& Store::operator[](char* name)
 	return payDesk[n];
 }
 
-double Store::avarageIncome()
+double Store::avarageIncome() const
 {
 	return totalIncome()/numberOfPayDesks;
 }
 
 bool Store::operator==(Store const& s)
 {
-	//return avarageIncome()==s.totalIncome();
+	return avarageIncome()==s.avarageIncome();
 }
 
 
