@@ -31,5 +31,5 @@ public:
 	TemplateList& operator+=(QQ);
 	QQ operator[](int);
 };
-
+// yo
 #endif /* TEMPLATELIST_H_ */
