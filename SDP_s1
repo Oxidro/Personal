@@ -1,0 +1,57 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+	fstream fs;
+	fs.open("test.txt", ios::out|ios::trunc);
+	for (int i = 0; i < 5; i++)
+	{
+		fs << i << endl;
+	}
+	cout << "Done!" << endl;
+	fs.close();
+
+	fs.open("test.txt", ios::in);
+	int x;
+	while (fs >> x)
+	{
+		cout << x + 1 << endl;
+	}
+	cout << "Reading complete!" << endl;
+	fs.close();
+
+	int arr[] = { 1, 2, 3, 4 };
+	fs.open("data.dat", ios::out | ios::binary | ios::trunc);
+	fs.write((char*)arr, 3 * sizeof(int));
+	fs.close();
+
+	int* arr2 = new int[3];
+	fs.open("data.dat", ios::in | ios::binary);
+	fs.read((char*)arr2, 3 * sizeof(int));
+	for (int i = 0; i < 3; i++) cout << arr2[i] << " ";
+
+	//ltf
+	int last;
+	fs.seekg(-4, ios::cur);
+	fs.read((char*)&last, sizeof(int));
+	fs.close();
+
+	fstream fs1("picture.png", ios::in | ios::binary);
+	fs1.seekg(0, ios::end);
+	auto sz = fs1.tellg();
+	cout << "Size: " << sz << endl;
+
+	char* buffer = new char[sz];
+	fs1.seekg(0, ios::beg);
+	fs1.read(buffer, sz);
+	fstream fs2("copy.png", ios::out | ios::binary | ios::trunc);
+	fs2.write(buffer, sz);
+	delete buffer;
+	fs1.close();
+	fs2.close();
+
+	return 0;
+}
